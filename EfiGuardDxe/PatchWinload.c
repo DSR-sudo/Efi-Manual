@@ -1,4 +1,5 @@
 #include "EfiGuardDxe.h"
+#include "OslTransferHook.h"
 
 #include <Guid/Acpi.h>
 #include <Library/BaseMemoryLib.h>
@@ -818,6 +819,20 @@ Exit:
 	else
 	{
 		Print(L"Successfully patched winload!OslFwpKernelSetupPhase1.\r\n");
+
+		// Also hook OslArchTransferToKernel for driver mapping
+		Print(L"\r\nInstalling OslArchTransferToKernel hook...\r\n");
+		EFI_STATUS TransferStatus = HookOslArchTransfer(ImageBase, NtHeaders);
+		if (EFI_ERROR(TransferStatus))
+		{
+			Print(L"WARNING: OslArchTransferToKernel hook failed: %r\r\n", TransferStatus);
+			Print(L"Driver mapping will not be available.\r\n");
+		}
+		else
+		{
+			Print(L"OslArchTransferToKernel hook installed successfully.\r\n");
+		}
+
 		RtlSleep(2000);
 
 		if (gDriverConfig.WaitForKeyPress)

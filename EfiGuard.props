@@ -2,14 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <EDK_PATH>$(SolutionDir)..</EDK_PATH>
+    <EDK_PATH>d:\Efi-Manual\edk2</EDK_PATH>
+    <EDK_BUILD>d:\Efi-Manual\edk2\Build\Mde\RELEASE_VS2022\X64</EDK_BUILD>
+    <MDEMODULE_BUILD>d:\Efi-Manual\edk2\Build\MdeModule\RELEASE_VS2022\X64</MDEMODULE_BUILD>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifest />
     <IntDir>obj\$(Platform)-$(Configuration)\</IntDir>
     <TargetExt>.efi</TargetExt>
     <IncludePath>$(EDK_PATH)\MdePkg\Include;$(EDK_PATH)\MdePkg\Include\X64;$(EDK_PATH)\MdeModulePkg\Include;$(EDK_PATH)\ShellPkg\Include</IncludePath>
-    <LibraryPath>$(SolutionDir)..\..\VisualUefi\EDK-II\$(Platform)\$(Configuration)</LibraryPath>
+    <LibraryPath>$(MDEMODULE_BUILD)\MdeModulePkg\Library\UefiHiiLib\UefiHiiLib\OUTPUT;$(MDEMODULE_BUILD)\MdeModulePkg\Library\UefiHiiServicesLib\UefiHiiServicesLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiDriverEntryPoint\UefiDriverEntryPoint\OUTPUT;$(EDK_BUILD)\MdePkg\Library\BaseMemoryLib\BaseMemoryLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\BaseLib\BaseLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\BaseDebugPrintErrorLevelLib\BaseDebugPrintErrorLevelLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\BasePrintLib\BasePrintLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiLib\UefiLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiBootServicesTableLib\UefiBootServicesTableLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiRuntimeServicesTableLib\UefiRuntimeServicesTableLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiDevicePathLibDevicePathProtocol\UefiDevicePathLibDevicePathProtocol\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiDebugLibConOut\UefiDebugLibConOut\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiMemoryLib\UefiMemoryLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiMemoryAllocationLib\UefiMemoryAllocationLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\BaseSynchronizationLib\BaseSynchronizationLib\OUTPUT;$(EDK_BUILD)\MdePkg\Library\UefiFileHandleLib\UefiFileHandleLib\OUTPUT</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -36,7 +38,7 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ControlFlowGuard>false</ControlFlowGuard>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <ForcedIncludeFiles>$(SolutionDir)..\..\VisualUefi\EDK-II\BaseLib\vshacks.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>d:\Efi-Manual\Include\vshacks.h</ForcedIncludeFiles>
       <CallingConvention />
       <TreatWChar_tAsBuiltInType />
       <StringPooling>true</StringPooling>
@@ -49,7 +51,7 @@
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>UefiHiiLib.lib;UefiHiiServicesLib.lib;UefiSortLib.lib;UefiShellLib.lib;GlueLib.lib;BaseLib.lib;BaseDebugPrintErrorLevelLib.lib;BasePrintLib.lib;UefiLib.lib;UefiBootServicesTableLib.lib;UefiRuntimeServicesTableLib.lib;UefiDevicePathLibDevicePathProtocol.lib;UefiDebugLibConOut.lib;UefiMemoryLib.lib;UefiMemoryAllocationLib.lib;BaseSynchronizationLib.lib;UefiFileHandleLib.lib</AdditionalDependencies>
+      <AdditionalDependencies>UefiDriverEntryPoint.lib;BaseLib.lib;BaseMemoryLib.lib;BaseDebugPrintErrorLevelLib.lib;BasePrintLib.lib;UefiLib.lib;UefiBootServicesTableLib.lib;UefiRuntimeServicesTableLib.lib;UefiDevicePathLibDevicePathProtocol.lib;UefiDebugLibConOut.lib;UefiMemoryAllocationLib.lib;BaseSynchronizationLib.lib;UefiFileHandleLib.lib</AdditionalDependencies>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <SubSystem>EFI Boot Service Driver</SubSystem>
       <Driver>Driver</Driver>

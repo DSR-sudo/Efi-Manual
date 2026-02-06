@@ -61,6 +61,11 @@ EFI_EVENT gEfiVirtualNotifyEvent = NULL;
 BOOLEAN gEfiGoneVirtual = FALSE;
 
 //
+// Global handle for self-delete access (set to gImageHandle)
+//
+EFI_HANDLE gEfiGuardImageHandle = NULL;
+
+//
 // Original gBS->LoadImage pointer
 //
 STATIC EFI_IMAGE_LOAD mOriginalLoadImage = NULL;
@@ -541,6 +546,10 @@ EfiGuardInitialize(
 	)
 {
 	ASSERT(ImageHandle == gImageHandle);
+	
+	// Store ImageHandle globally for self-delete access
+	extern EFI_HANDLE gEfiGuardImageHandle;
+	gEfiGuardImageHandle = ImageHandle;
 
 	// Check if we're not already loaded.
 	EFIGUARD_DRIVER_PROTOCOL* EfiGuardDriverProtocol;

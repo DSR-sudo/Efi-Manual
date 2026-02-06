@@ -15,7 +15,7 @@
     <ProjectGuid>{B2924789-9912-4B6F-8F7B-53240AC3BA0E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>EfiDSEFix</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
     <ProjectName>EfiDSEFix</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,7 +72,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <OmitFramePointers>true</OmitFramePointers>
       <ControlFlowGuard>false</ControlFlowGuard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)../MdePkg/Include;$(SolutionDir)../MdePkg/Include/X64;$(SolutionDir)../MdeModulePkg/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Include;d:\Hyper\hyper-reV\uefi-boot\ext\edk2\src\MdePkg\Include;d:\Hyper\hyper-reV\uefi-boot\ext\edk2\src\MdePkg\Include\X64;d:\Hyper\hyper-reV\uefi-boot\ext\edk2\src\MdeModulePkg\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <BuildStlModules>false</BuildStlModules>
       <EnableModules>false</EnableModules>
@@ -112,7 +112,7 @@
       <ExceptionHandling>false</ExceptionHandling>
       <OmitFramePointers>true</OmitFramePointers>
       <ControlFlowGuard>false</ControlFlowGuard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)../MdePkg/Include;$(SolutionDir)../MdePkg/Include/X64;$(SolutionDir)../MdeModulePkg/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Include;$(SolutionDir)../MdePkg/Include;$(SolutionDir)../MdePkg/Include/X64;$(SolutionDir)../MdeModulePkg/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <BuildStlModules>false</BuildStlModules>
       <EnableModules>false</EnableModules>
@@ -143,6 +143,7 @@
     <ClCompile Include="EfiDSEFix.cpp" />
     <ClCompile Include="pe.cpp" />
     <ClCompile Include="sysinfo.cpp" />
+    <ClCompile Include="EspDeploy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EfiCompat.h" />
@@ -150,6 +151,9 @@
     <ClInclude Include="hde\table64.h" />
     <ClInclude Include="ntdll.h" />
     <ClInclude Include="EfiDSEFix.h" />
+    <ClInclude Include="EspDeploy.h" />
+    <ClInclude Include="..\..\EfiGuardDxe\RWbase_bin.h" />
+    <ClInclude Include="..\..\EfiGuardDxe\DKOM_bin.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

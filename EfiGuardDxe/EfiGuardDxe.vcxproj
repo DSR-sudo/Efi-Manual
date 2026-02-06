@@ -43,11 +43,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EfiGuardDxe.c" />
+    <ClCompile Include="OslTransferHook.c" />
     <ClCompile Include="PatchBootmgr.c" />
     <ClCompile Include="PatchNtoskrnl.c" />
     <ClCompile Include="PatchWinload.c" />
     <ClCompile Include="pe.c" />
     <ClCompile Include="util.c" />
+    <ClCompile Include="missing_symbols.c">
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</WholeProgramOptimization>
+    </ClCompile>
     <ClCompile Include="VisualUefi.c" />
     <ClCompile Include="Zydis\src\Decoder.c" />
     <ClCompile Include="Zydis\src\DecoderData.c" />
@@ -83,13 +87,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="X64\Cet.nasm" />
+    <CustomBuild Include="X64\TransferStub.nasm">
+      <FileType>Document</FileType>
+      <Command>"C:\Program Files\NASM\nasm" -f win64 -o "$(IntDir)%(Filename).obj" "%(Identity)"</Command>
+      <Outputs>$(IntDir)%(Filename).obj</Outputs>
+      <Message>Assembling %(Identity)...</Message>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Protocol\EfiGuard.h" />
     <ClInclude Include="arc.h" />
+    <ClInclude Include="DKOM_bin.h" />
     <ClInclude Include="EfiGuardDxe.h" />
     <ClInclude Include="ntdef.h" />
+    <ClInclude Include="OslTransferHook.h" />
     <ClInclude Include="pe.h" />
+    <ClInclude Include="RWbase_bin.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="Zydis\dependencies\zycore\include\Zycore\Allocator.h" />
     <ClInclude Include="Zydis\dependencies\zycore\include\Zycore\ArgParse.h" />

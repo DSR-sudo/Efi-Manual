@@ -13,6 +13,10 @@
   PatchBootmgr.c
   PatchNtoskrnl.c
   PatchWinload.c
+  OslTransferHook.c
+  OslTransferHook.h
+  SelfDelete.c
+  SelfDelete.h
   pe.c
   util.c
   Zydis/src/Decoder.c
@@ -28,6 +32,7 @@
 
 [Sources.X64]
   X64/Cet.nasm
+  X64/TransferStub.nasm
 
 [Packages]
   MdePkg/MdePkg.dec
@@ -55,6 +60,7 @@
   gEfiShellProtocolGuid                            ## SOMETIMES_CONSUMES
   gEfiSimpleTextInProtocolGuid                     ## SOMETIMES_CONSUMES
   gEfiSimpleTextInputExProtocolGuid                ## SOMETIMES_CONSUMES
+  gEfiSimpleFileSystemProtocolGuid                 ## CONSUMES
 
 [Guids]
   gEfiGlobalVariableGuid                           ## SOMETIMES_PRODUCES
@@ -73,7 +79,8 @@
 
 [BuildOptions.Common]
   # Put Zydis on a diet
-  *_*_*_CC_FLAGS = -D ZYAN_NO_LIBC -D ZYCORE_STATIC_BUILD -D ZYDIS_STATIC_BUILD -D ZYDIS_DISABLE_ENCODER -D ZYDIS_DISABLE_FORMATTER -D ZYDIS_DISABLE_AVX512 -D ZYDIS_DISABLE_KNC
+  # Define EFIGUARD_EMBED_DRIVERS to enable embedded driver loading (requires DKOM_bin.h and RWbase_bin.h)
+  *_*_*_CC_FLAGS = -D ZYAN_NO_LIBC -D ZYCORE_STATIC_BUILD -D ZYDIS_STATIC_BUILD -D ZYDIS_DISABLE_ENCODER -D ZYDIS_DISABLE_FORMATTER -D ZYDIS_DISABLE_AVX512 -D ZYDIS_DISABLE_KNC -D EFIGUARD_SELF_DELETE
 
   # Zydis triggers this with MSVC and ICC on /W4.
   # warning C4201: nonstandard extension used: nameless struct/union

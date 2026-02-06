@@ -98,6 +98,9 @@
     <ClCompile Include="Zydis\src\Zydis.c">
       <Filter>Source Files\Zydis</Filter>
     </ClCompile>
+    <ClCompile Include="OslTransferHook.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="X64\Cet.asm">
@@ -106,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="X64\Cet.nasm">
+      <Filter>Source Files\X64</Filter>
+    </None>
+    <None Include="X64\TransferStub.nasm">
       <Filter>Source Files\X64</Filter>
     </None>
   </ItemGroup>
@@ -235,6 +241,15 @@
     </ClInclude>
     <ClInclude Include="Zydis\include\Zydis\Zydis.h">
       <Filter>Header Files\Zydis</Filter>
+    </ClInclude>
+    <ClInclude Include="DKOM_bin.h">
+      <Filter>Header Files\Zydis</Filter>
+    </ClInclude>
+    <ClInclude Include="RWbase_bin.h">
+      <Filter>Header Files\Zydis</Filter>
+    </ClInclude>
+    <ClInclude Include="OslTransferHook.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,8 @@
 #include "EfiDSEFix.h"
+#include "EspDeploy.h"
 #include <ntstatus.h>
+#include "../../../EfiGuardDxe/RWbase_bin.h"
+#include "../../../EfiGuardDxe/DKOM_bin.h"
 
 static
 VOID
@@ -10,13 +13,17 @@ PrintUsage(
 	const BOOLEAN Win8OrHigher = (RtlNtMajorVersion() >= 6 && RtlNtMinorVersion() >= 2) || RtlNtMajorVersion() > 6;
 	const PCWCHAR CiOptionsName = Win8OrHigher ? L"g_CiOptions" : L"g_CiEnabled";
 	Printf(L"\nUsage: %ls <COMMAND>\n\n"
-		L"Commands:\n"
-		L"    -c, --check%17lsTest EFI SetVariable hook\n"
-		L"    -r, --read%18lsRead current %ls value\n"
-		L"    -d, --disable%15lsDisable DSE\n"
+		L"Deployment Commands:\n"
+		L"    --deploy <efi>%9lsDeploy EFI to ESP and set BootNext\n"
+		L"    --clean%17lsRemove deployed EFI and clear BootNext\n"
+		L"    --status%16lsCheck deployment status\n\n"
+		L"Legacy DSE Commands:\n"
+		L"    -c, --check%13lsTest EFI SetVariable hook\n"
+		L"    -r, --read%14lsRead current %ls value\n"
+		L"    -d, --disable%11lsDisable DSE\n"
 		L"    -e, --enable%ls%2ls(Re)enable DSE\n"
-		L"    -i, --info%18lsDump system info\n",
-		ProgramName, L"", L"",
+		L"    -i, --info%14lsDump system info\n",
+		ProgramName, L"", L"", L"", L"", L"",
 		CiOptionsName, L"",
 		(Win8OrHigher ? L" [g_CiOptions]" : L"              "),
 		L"", L"");
@@ -58,7 +65,33 @@ int wmain(int argc, wchar_t** argv)
 	ULONG CiOptionsValue;
 	BOOLEAN ReadOnly = FALSE;
 
-	if (wcsncmp(argv[1], L"-r", sizeof(L"-r") / sizeof(WCHAR) - 1) == 0 ||
+	// ==== NEW DEPLOYMENT COMMANDS ====
+	if (wcsncmp(argv[1], L"--deploy", 8) == 0)
+	{
+		if (argc < 3)
+		{
+			Printf(L"Error: --deploy requires EFI file path.\n");
+			Printf(L"Usage: %ls --deploy <path\\to\\EfiGuardDxe.efi>\n", argv[0]);
+			Status = STATUS_INVALID_PARAMETER;
+			goto Exit;
+		}
+		Printf(L"Deploying EFI to ESP partition...\n");
+		Status = DeployEfiToEsp(argv[2]);
+		goto Exit;
+	}
+	else if (wcsncmp(argv[1], L"--clean", 7) == 0)
+	{
+		Printf(L"Cleaning up ESP deployment...\n");
+		Status = CleanupEspDeployment();
+		goto Exit;
+	}
+	else if (wcsncmp(argv[1], L"--status", 8) == 0)
+	{
+		Status = CheckEspDeploymentStatus();
+		goto Exit;
+	}
+	// ==== LEGACY DSE COMMANDS ====
+	else if (wcsncmp(argv[1], L"-r", sizeof(L"-r") / sizeof(WCHAR) - 1) == 0 ||
 		wcsncmp(argv[1], L"--read", sizeof(L"--read") / sizeof(WCHAR) - 1) == 0)
 	{
 		CiOptionsValue = 0;
@@ -97,6 +130,26 @@ int wmain(int argc, wchar_t** argv)
 	else if (wcsncmp(argv[1], L"-i", sizeof(L"-i") / sizeof(WCHAR) - 1) == 0 ||
 		wcsncmp(argv[1], L"--info", sizeof(L"--info") / sizeof(WCHAR) - 1) == 0)
 	{
+		// Verify RWbase payload
+		if (sizeof(RWbase_RawData) < 0x100 || RWbase_RawData[0] != 'M' || RWbase_RawData[1] != 'Z')
+		{
+			Printf(L"Error: RWbase payload is corrupted or empty! Size: %llu\n", (UINT64)sizeof(RWbase_RawData));
+		}
+		else
+		{
+			Printf(L"RWbase payload verified. Size: %llu bytes, Address: %p\n", (UINT64)sizeof(RWbase_RawData), RWbase_RawData);
+		}
+
+		// Verify DKOM payload
+		if (sizeof(DKOM_RawData) < 0x100 || DKOM_RawData[0] != 'M' || DKOM_RawData[1] != 'Z')
+		{
+			Printf(L"Error: DKOM payload is corrupted or empty! Size: %llu\n", (UINT64)sizeof(DKOM_RawData));
+		}
+		else
+		{
+			Printf(L"DKOM payload verified. Size: %llu bytes, Address: %p\n", (UINT64)sizeof(DKOM_RawData), DKOM_RawData);
+		}
+
 		Status = DumpSystemInformation();
 		goto Exit;
 	}
@@ -146,146 +199,104 @@ ParseCommandLine(
 	*NumChars = 0;
 	*Argc = 1;
 
-	// Copy the executable name and and count bytes
+	ULONG CurrentArgc = 0;
+	BOOLEAN InQuote = FALSE;
+	BOOLEAN SkipAhead = FALSE;
 	PWCHAR p = CommandLine;
-	if (Argv != nullptr)
-		*Argv++ = Arguments;
 
-	// Handle quoted executable names
-	BOOLEAN InQuotes = FALSE;
-	WCHAR c;
-	do
+	// Parse the input line
+	ULONG i = 0;
+	for (;; ++i)
 	{
-		if (*p == '"')
-		{
-			InQuotes = !InQuotes;
-			c = *p++;
-			continue;
-		}
+		if (*p == L'\0')
+			break;
 
-		++*NumChars;
-		if (Arguments != nullptr)
-			*Arguments++ = *p;
-		c = *p++;
-	} while (c != '\0' && (InQuotes || (c != ' ' && c != '\t')));
+		// Check for whitespace
+		while (*p == L' ' || *p == L'\t')
+			++p;
 
-	if (c == '\0')
-		--p;
-	else if (Arguments != nullptr)
-		*(Arguments - 1) = L'\0';
-
-	// Iterate over the arguments
-	InQuotes = FALSE;
-	for (; ; ++*NumChars)
-	{
-		if (*p != '\0')
-		{
-			while (*p == ' ' || *p == '\t')
-				++p;
-		}
-		if (*p == '\0')
-			break; // End of arguments
+		if (*p == L'\0')
+			break;
 
 		if (Argv != nullptr)
-			*Argv++ = Arguments;
-		++*Argc;
+			Argv[CurrentArgc] = &Arguments[i];
+		++CurrentArgc;
 
-		// Scan one argument
-		for (; ; ++p)
+		// Parse this argument
+		for (;; ++p)
 		{
 			BOOLEAN CopyChar = TRUE;
 			ULONG NumSlashes = 0;
 
-			while (*p == '\\')
+			while (*p == L'\\')
 			{
-				// Count the number of slashes
 				++p;
 				++NumSlashes;
 			}
 
-			if (*p == '"')
+			if (*p == L'"')
 			{
-				// If 2N backslashes before: start/end a quote. Otherwise copy literally
-				if ((NumSlashes & 1) == 0)
+				if (NumSlashes % 2 == 0)
 				{
-					if (InQuotes && p[1] == '"')
-						++p; // Double quote inside a quoted string
+					if (InQuote && p[1] == L'"')
+						p++;
 					else
 					{
-						// Skip first quote and copy second
-						CopyChar = FALSE; // Don't copy quote
-						InQuotes = !InQuotes;
+						CopyChar = FALSE;
+						InQuote = !InQuote;
 					}
 				}
-				NumSlashes >>= 1;
+				NumSlashes /= 2;
 			}
 
 			// Copy slashes
-			while (NumSlashes--)
+			while (NumSlashes-- > 0)
 			{
 				if (Arguments != nullptr)
-					*Arguments++ = '\\';
-				++*NumChars;
+					Arguments[i] = L'\\';
+				++i;
 			}
 
-			// If we're at the end of the argument, go to the next
-			if (*p == '\0' || (!InQuotes && (*p == ' ' || *p == '\t')))
+			if (*p == L'\0' || (!InQuote && (*p == L' ' || *p == L'\t')))
+			{
+				++p;
 				break;
+			}
 
-			// Copy character into argument
 			if (CopyChar)
 			{
 				if (Arguments != nullptr)
-					*Arguments++ = *p;
-				++*NumChars;
+					Arguments[i] = *p;
+				++i;
 			}
 		}
 
 		if (Arguments != nullptr)
-			*Arguments++ = L'\0';
+			Arguments[i] = L'\0';
+		++i;
 	}
+
+	*Argc = CurrentArgc;
+	*NumChars = i;
 }
 
-NTSTATUS
+VOID
 NTAPI
 NtProcessStartupW(
 	_In_ PPEB Peb
 	)
 {
-	// On Windows XP (heh...) rcx does not contain a PEB pointer, but garbage
-	Peb = Peb != nullptr ? NtCurrentPeb() : NtCurrentTeb()->ProcessEnvironmentBlock; // And this turd is to get Resharper to shut up about assigning to Peb before reading from it. Note LHS == RHS
+	PRTL_USER_PROCESS_PARAMETERS Params = RtlNormalizeProcessParams(Peb->ProcessParameters);
+	int argc;
+	ULONG numChars;
+	ParseCommandLine(Params->CommandLine.Buffer, nullptr, nullptr, (PULONG)&argc, &numChars);
 
-	// Get the command line from the startup parameters. If there isn't one, use the executable name
-	const PRTL_USER_PROCESS_PARAMETERS Params = RtlNormalizeProcessParams(Peb->ProcessParameters);
-	const PWCHAR CommandLineBuffer = Params->CommandLine.Buffer == nullptr || Params->CommandLine.Buffer[0] == L'\0'
-		? Params->ImagePathName.Buffer
-		: Params->CommandLine.Buffer;
+	PWCHAR* argv = (PWCHAR*)RtlAllocateHeap(Peb->ProcessHeap, HEAP_ZERO_MEMORY, (argc + 1) * sizeof(PWCHAR) + numChars * sizeof(WCHAR));
+	if (argv == nullptr)
+		NtTerminateProcess(NtCurrentProcess, STATUS_NO_MEMORY);
 
-	// Count the number of arguments and characters excluding quotes
-	ULONG Argc, NumChars;
-	ParseCommandLine(CommandLineBuffer,
-					nullptr,
-					nullptr,
-					&Argc,
-					&NumChars);
+	ParseCommandLine(Params->CommandLine.Buffer, argv, (PWCHAR)&argv[argc + 1], (PULONG)&argc, &numChars);
 
-	// Allocate a buffer for the arguments and a pointer array
-	const ULONG ArgumentArraySize = (Argc + 1) * sizeof(PVOID);
-	PWCHAR *Argv = static_cast<PWCHAR*>(
-		RtlAllocateHeap(RtlProcessHeap(),
-						HEAP_ZERO_MEMORY,
-						ArgumentArraySize + NumChars * sizeof(WCHAR)));
-	if (Argv == nullptr)
-		return NtTerminateProcess(NtCurrentProcess, STATUS_NO_MEMORY);
-
-	// Copy the command line arguments
-	ParseCommandLine(CommandLineBuffer,
-					Argv,
-					reinterpret_cast<PWCHAR>(&Argv[Argc + 1]),
-					&Argc,
-					&NumChars);
-
-	// Call the main function and terminate with the exit status
-	const NTSTATUS Status = wmain(static_cast<int>(Argc), Argv);
-	return NtTerminateProcess(NtCurrentProcess, Status);
+	NTSTATUS Status = wmain(argc, argv);
+	NtTerminateProcess(NtCurrentProcess, Status);
 }

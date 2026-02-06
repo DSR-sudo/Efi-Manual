@@ -54,8 +54,46 @@
 #define LOBYTE(w)					((UINT8)(((UINTN)(w)) & 0xff))
 #define HIBYTE(w)					((UINT8)((((UINTN)(w)) >> 8) & 0xff))
 
-// Typedefs
+//
+// LIST_ENTRY Compatibility Layer
+// EDK2's LIST_ENTRY uses ForwardLink/BackLink, but Windows NT uses Flink/Blink.
+// These macros bridge the naming difference to allow NT-style code to compile.
+//
+// Note: EDK2's Base.h is force-included via /FI flag before our code,
+// so we cannot redefine LIST_ENTRY. Instead we create compatibility macros.
+//
+#define Flink ForwardLink
+#define Blink BackLink
+
+// PLIST_ENTRY pointer type (not provided by EDK2)
+typedef LIST_ENTRY *PLIST_ENTRY;
+
+//
+// CONTAINING_RECORD - get pointer to container from member pointer
+//
+#ifndef CONTAINING_RECORD
+#define CONTAINING_RECORD(Address, Type, Field) \
+	((Type *)((UINT8*)(Address) - FIELD_OFFSET(Type, Field)))
+#endif
+
+//
+// NTAPI calling convention (ignored in EFI context - uses default)
+//
+#ifndef NTAPI
+#define NTAPI
+#endif
+
+//
+// Typedefs (basic types first)
+//
 typedef INT32 NTSTATUS;
+
+//
+// Driver entry point function type for Windows kernel drivers
+//
+typedef NTSTATUS (NTAPI *DRIVER_ENTRY_FN)(VOID* DriverObject, VOID* RegistryPath);
+
+
 
 typedef union _LARGE_INTEGER {
 	struct {

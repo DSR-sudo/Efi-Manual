@@ -47,6 +47,25 @@ typedef EFI_IMAGE_EXPORT_DIRECTORY *PEFI_IMAGE_EXPORT_DIRECTORY;
 	? ((PEFI_IMAGE_NT_HEADERS64)(NtHeaders))->OptionalHeader.Field	\
 	: ((PEFI_IMAGE_NT_HEADERS32)(NtHeaders))->OptionalHeader.Field)
 
+//
+// Relocation types (not defined in EDK2 PeImage.h)
+//
+#define EFI_IMAGE_REL_BASED_ABSOLUTE		0
+#define EFI_IMAGE_REL_BASED_HIGH			1
+#define EFI_IMAGE_REL_BASED_LOW				2
+#define EFI_IMAGE_REL_BASED_HIGHLOW			3
+#define EFI_IMAGE_REL_BASED_HIGHADJ			4
+#define EFI_IMAGE_REL_BASED_DIR64			10
+
+//
+// Base relocation block structure (4-byte aligned)
+//
+typedef struct _IMAGE_BASE_RELOCATION {
+	UINT32 VirtualAddress;
+	UINT32 SizeOfBlock;
+	// UINT16 TypeOffset[...];  // Variable length array follows
+} IMAGE_BASE_RELOCATION, *PIMAGE_BASE_RELOCATION;
+
 #define IMAGE_FIRST_SECTION(NtHeaders) ((PEFI_IMAGE_SECTION_HEADER)	\
 	((UINTN)(NtHeaders) +											\
 	FIELD_OFFSET(EFI_IMAGE_NT_HEADERS, OptionalHeader) +			\
