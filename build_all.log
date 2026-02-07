@@ -1,0 +1,148 @@
+Build environment: Windows-10-10.0.19045-SP0
+SOURCE_DATE_EPOCH not set - using 1770446708
+Build start time: 14:45:08, Feb.07 2026
+
+WORKSPACE        = D:\Efi-Manual\edk2
+PACKAGES_PATH    = C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv;D:\Efi-Manual\edk2
+EDK_TOOLS_PATH   = D:\Efi-Manual\edk2\BaseTools
+EDK_TOOLS_BIN    = D:\Efi-Manual\edk2\BaseTools\Bin\Win32
+CONF_PATH        = D:\Efi-Manual\edk2\Conf
+PYTHON_COMMAND   = C:\Users\DRS\AppData\Local\Programs\Python\Python313\python.exe
+
+
+Processing meta-data .
+Architecture(s)  = X64
+Build target     = RELEASE
+Toolchain        = VS2022
+
+Active Platform          = C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardPkg.dsc
+
+FLASH_DEFINITION = None
+
+Library instances of module [C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe.inf] [X64]:
+	UefiDriverEntryPoint : D:\Efi-Manual\edk2\MdePkg\Library\UefiDriverEntryPoint\UefiDriverEntryPoint.inf
+	UefiBootServicesTableLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiBootServicesTableLib\UefiBootServicesTableLib.inf
+	UefiRuntimeServicesTableLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiRuntimeServicesTableLib\UefiRuntimeServicesTableLib.inf
+	DebugLib : D:\Efi-Manual\edk2\MdePkg\Library\BaseDebugLibNull\BaseDebugLibNull.inf
+	UefiLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiLib\UefiLib.inf
+	BaseMemoryLib : D:\Efi-Manual\edk2\MdePkg\Library\BaseMemoryLibOptDxe\BaseMemoryLibOptDxe.inf
+	DevicePathLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiDevicePathLibDevicePathProtocol\UefiDevicePathLibDevicePathProtocol.inf
+	SynchronizationLib : D:\Efi-Manual\edk2\MdePkg\Library\BaseSynchronizationLib\BaseSynchronizationLib.inf
+	MemoryAllocationLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiMemoryAllocationLib\UefiMemoryAllocationLib.inf
+	PrintLib : D:\Efi-Manual\edk2\MdePkg\Library\BasePrintLib\BasePrintLib.inf
+	BaseLib : D:\Efi-Manual\edk2\MdePkg\Library\BaseLib\BaseLib.inf
+	PcdLib : D:\Efi-Manual\edk2\MdePkg\Library\DxePcdLib\DxePcdLib.inf
+	RegisterFilterLib : D:\Efi-Manual\edk2\MdePkg\Library\RegisterFilterLibNull\RegisterFilterLibNull.inf
+	TimerLib : D:\Efi-Manual\edk2\MdePkg\Library\BaseTimerLibNullTemplate\BaseTimerLibNullTemplate.inf
+	StackCheckLib : D:\Efi-Manual\edk2\MdePkg\Library\StackCheckLibNull\StackCheckLibNull.inf
+
+Library instances of module [C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\Application\Loader\Loader.inf] [X64]:
+	UefiApplicationEntryPoint : D:\Efi-Manual\edk2\MdePkg\Library\UefiApplicationEntryPoint\UefiApplicationEntryPoint.inf
+	UefiBootServicesTableLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiBootServicesTableLib\UefiBootServicesTableLib.inf
+	DebugLib : D:\Efi-Manual\edk2\MdePkg\Library\BaseDebugLibNull\BaseDebugLibNull.inf
+	UefiLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiLib\UefiLib.inf
+	ReportStatusCodeLib : D:\Efi-Manual\edk2\MdeModulePkg\Library\DxeReportStatusCodeLib\DxeReportStatusCodeLib.inf
+	DevicePathLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiDevicePathLibDevicePathProtocol\UefiDevicePathLibDevicePathProtocol.inf
+	PrintLib : D:\Efi-Manual\edk2\MdePkg\Library\BasePrintLib\BasePrintLib.inf
+	UefiBootManagerLib : D:\Efi-Manual\edk2\MdeModulePkg\Library\UefiBootManagerLib\UefiBootManagerLib.inf
+	HobLib : D:\Efi-Manual\edk2\MdePkg\Library\DxeHobLib\DxeHobLib.inf
+	PcdLib : D:\Efi-Manual\edk2\MdePkg\Library\DxePcdLib\DxePcdLib.inf
+	BaseLib : D:\Efi-Manual\edk2\MdePkg\Library\BaseLib\BaseLib.inf
+	BaseMemoryLib : D:\Efi-Manual\edk2\MdePkg\Library\BaseMemoryLibOptDxe\BaseMemoryLibOptDxe.inf
+	PerformanceLib : D:\Efi-Manual\edk2\MdePkg\Library\BasePerformanceLibNull\BasePerformanceLibNull.inf
+	PeCoffGetEntryPointLib : D:\Efi-Manual\edk2\MdePkg\Library\BasePeCoffGetEntryPointLib\BasePeCoffGetEntryPointLib.inf
+	UefiRuntimeServicesTableLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiRuntimeServicesTableLib\UefiRuntimeServicesTableLib.inf
+	DxeServicesTableLib : D:\Efi-Manual\edk2\MdePkg\Library\DxeServicesTableLib\DxeServicesTableLib.inf
+	MemoryAllocationLib : D:\Efi-Manual\edk2\MdePkg\Library\UefiMemoryAllocationLib\UefiMemoryAllocationLib.inf
+	DxeServicesLib : D:\Efi-Manual\edk2\MdePkg\Library\DxeServicesLib\DxeServicesLib.inf
+	HiiLib : D:\Efi-Manual\edk2\MdeModulePkg\Library\UefiHiiLib\UefiHiiLib.inf
+	SortLib : D:\Efi-Manual\edk2\MdeModulePkg\Library\UefiSortLib\UefiSortLib.inf
+	VariablePolicyHelperLib : D:\Efi-Manual\edk2\MdeModulePkg\Library\VariablePolicyHelperLib\VariablePolicyHelperLib.inf
+	UefiHiiServicesLib : D:\Efi-Manual\edk2\MdeModulePkg\Library\UefiHiiServicesLib\UefiHiiServicesLib.inf
+	RegisterFilterLib : D:\Efi-Manual\edk2\MdePkg\Library\RegisterFilterLibNull\RegisterFilterLibNull.inf
+	StackCheckLib : D:\Efi-Manual\edk2\MdePkg\Library\StackCheckLibNull\StackCheckLibNull.inf
+DEPEX[EfiGuardDxe] (+EfiGuardDxe) = ['(', '{ 0x387477C2, 0x69C7, 0x11D2, { 0x8E, 0x39, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B }}', 'AND', '{ 0x5B1B31A1, 0x9562, 0x11D2, { 0x8E, 0x3F, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B }}', 'AND', '{ 0x1E5668E2, 0x8481, 0x11D4, { 0xBC, 0xF1, 0x00, 0x80, 0xC7, 0x3C, 0x88, 0x81 }}', 'AND', '{ 0x6441F818, 0x6362, 0x4E44, { 0xB5, 0x70, 0x7D, 0xBA, 0x31, 0xDD, 0x24, 0x53 }}', 'AND', '{ 0x27CFAC88, 0x46CC, 0x11D4, { 0x9A, 0x38, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D }}', 'AND', '{ 0x665E3FF6, 0x46CC, 0x11D4, { 0x9A, 0x38, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D }}', 'AND', '{ 0xb7dfb4e1, 0x052f, 0x449f, { 0x87, 0xbe, 0x98, 0x18, 0xfc, 0x91, 0xb7, 0x33 }}', ')']
+
+
+DEPEX[EfiGuardDxe] (+DxePcdLib) = ['(', '{ 0x387477C2, 0x69C7, 0x11D2, { 0x8E, 0x39, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B }}', 'AND', '{ 0x5B1B31A1, 0x9562, 0x11D2, { 0x8E, 0x3F, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B }}', 'AND', '{ 0x1E5668E2, 0x8481, 0x11D4, { 0xBC, 0xF1, 0x00, 0x80, 0xC7, 0x3C, 0x88, 0x81 }}', 'AND', '{ 0x6441F818, 0x6362, 0x4E44, { 0xB5, 0x70, 0x7D, 0xBA, 0x31, 0xDD, 0x24, 0x53 }}', 'AND', '{ 0x27CFAC88, 0x46CC, 0x11D4, { 0x9A, 0x38, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D }}', 'AND', '{ 0x665E3FF6, 0x46CC, 0x11D4, { 0x9A, 0x38, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D }}', 'AND', '{ 0xb7dfb4e1, 0x052f, 0x449f, { 0x87, 0xbe, 0x98, 0x18, 0xfc, 0x91, 0xb7, 0x33 }}', ')', 'AND', '(', '{ 0x13a3f0f6, 0x264a, 0x3ef0, { 0xf2, 0xe0, 0xde, 0xc5, 0x12, 0x34, 0x2f, 0x34 } }', ')']
+
+
+
+
+
+
+
+
+DEPEX[EfiGuardDxe] (+UefiDevicePathLibDevicePathProtocol) = ['(', '{ 0x387477C2, 0x69C7, 0x11D2, { 0x8E, 0x39, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B }}', 'AND', '{ 0x5B1B31A1, 0x9562, 0x11D2, { 0x8E, 0x3F, 0x00, 0xA0, 0xC9, 0x69, 0x72, 0x3B }}', 'AND', '{ 0x1E5668E2, 0x8481, 0x11D4, { 0xBC, 0xF1, 0x00, 0x80, 0xC7, 0x3C, 0x88, 0x81 }}', 'AND', '{ 0x6441F818, 0x6362, 0x4E44, { 0xB5, 0x70, 0x7D, 0xBA, 0x31, 0xDD, 0x24, 0x53 }}', 'AND', '{ 0x27CFAC88, 0x46CC, 0x11D4, { 0x9A, 0x38, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D }}', 'AND', '{ 0x665E3FF6, 0x46CC, 0x11D4, { 0x9A, 0x38, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D }}', 'AND', '{ 0xb7dfb4e1, 0x052f, 0x449f, { 0x87, 0xbe, 0x98, 0x18, 0xfc, 0x91, 0xb7, 0x33 }}', ')', 'AND', '(', '{ 0x13a3f0f6, 0x264a, 0x3ef0, { 0xf2, 0xe0, 0xde, 0xc5, 0x12, 0x34, 0x2f, 0x34 } }', ')', 'AND', '(', '{ 0x0379BE4E, 0xD706, 0x437D, { 0xB0, 0x37, 0xED, 0xB8, 0x2F, 0xB7, 0x72, 0xA4 }}', ')']
+
+
+
+
+
+
+ done!
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\BaseSynchronizationLib\BaseSynchronizationLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\UefiLib\UefiLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\UefiDriverEntryPoint\UefiDriverEntryPoint.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\BaseTimerLibNullTemplate\BaseTimerLibNullTemplate.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\UefiRuntimeServicesTableLib\UefiRuntimeServicesTableLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\UefiDevicePathLibDevicePathProtocol\UefiDevicePathLibDevicePathProtocol.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\BasePrintLib\BasePrintLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\StackCheckLibNull\StackCheckLibNull.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\UefiMemoryAllocationLib\UefiMemoryAllocationLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\UefiBootServicesTableLib\UefiBootServicesTableLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\BaseDebugLibNull\BaseDebugLibNull.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\BaseMemoryLibOptDxe\BaseMemoryLibOptDxe.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\BaseLib\BaseLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\DxePcdLib\DxePcdLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\RegisterFilterLibNull\RegisterFilterLibNull.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdeModulePkg\Library\UefiBootManagerLib\UefiBootManagerLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\UefiApplicationEntryPoint\UefiApplicationEntryPoint.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdeModulePkg\Library\DxeReportStatusCodeLib\DxeReportStatusCodeLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\BasePerformanceLibNull\BasePerformanceLibNull.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\BasePeCoffGetEntryPointLib\BasePeCoffGetEntryPointLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\DxeServicesTableLib\DxeServicesTableLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\DxeServicesLib\DxeServicesLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdeModulePkg\Library\UefiHiiLib\UefiHiiLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdeModulePkg\Library\UefiSortLib\UefiSortLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdeModulePkg\Library\VariablePolicyHelperLib\VariablePolicyHelperLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdePkg\Library\DxeHobLib\DxeHobLib.inf [X64]
+Building ... D:\Efi-Manual\edk2\MdeModulePkg\Library\UefiHiiServicesLib\UefiHiiServicesLib.inf [X64]
+Building ... C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\Application\Loader\Loader.inf [X64]
+Building ... C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe.inf [X64]
+	"D:\Ewdk\Program Files\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\bin\Hostx86\x64\cl.exe" /FoD:\Efi-Manual\edk2\Build\EfiGuard\RELEASE_VS2022\X64\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe\OUTPUT\.\ /showIncludes /nologo /c /WX /GS /W4 /Gs32768 /D UNICODE /O1b2s /GL /Gy /FIAutoGen.h /EHs-c- /GR- /GF /Gw /volatileMetadata- -D ZYAN_NO_LIBC -D ZYCORE_STATIC_BUILD -D ZYDIS_STATIC_BUILD -D ZYDIS_DISABLE_ENCODER -D ZYDIS_DISABLE_FORMATTER -D ZYDIS_DISABLE_AVX512 -D ZYDIS_DISABLE_KNC -D EFIGUARD_SELF_DELETE /wd4201 /O2 /Ot /Zi -D DISABLE_NEW_DEPRECATED_INTERFACES /utf-8 /GS- /Qspectre- /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\X64  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe  /ID:\Efi-Manual\edk2\Build\EfiGuard\RELEASE_VS2022\X64\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe\DEBUG  /ID:\Efi-Manual\edk2\MdePkg  /ID:\Efi-Manual\edk2\MdePkg\Include  /ID:\Efi-Manual\edk2\MdePkg\Test\UnitTest\Include  /ID:\Efi-Manual\edk2\MdePkg\Test\Mock\Include  /ID:\Efi-Manual\edk2\MdePkg\Library\MipiSysTLib\mipisyst\library\include  /ID:\Efi-Manual\edk2\MdePkg\Include\X64  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\Include  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\Include\Protocol  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\Zydis\dependencies\zycore\include  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\Zydis\include  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\Zydis\src  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\Zydis\msvc  /ID:\Efi-Manual\edk2\MdeModulePkg  /ID:\Efi-Manual\edk2\MdeModulePkg\Include  /ID:\Efi-Manual\edk2\MdeModulePkg\Test\Mock\Include @D:\Efi-Manual\edk2\Build\EfiGuard\RELEASE_VS2022\X64\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe\OUTPUT\cc_resp_17.txt
+Waiting for thread ending...(1)
+cl : Command line warning D9025 : overriding '/O1' with '/O2'
+cl : Command line warning D9025 : overriding '/Os' with '/Ot'
+cl : Command line warning D9025 : overriding '/GS' with '/GS-'
+OslTransferHook.c
+PatchWinload.c
+EfiGuardDxe.c
+Waiting for thread ending...(1)
+SelfDelete.c
+C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\SelfDelete.c(84): error C2220: the following warning is treated as an error
+C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\SelfDelete.c(84): warning C4013: 'ConvertDevicePathToText' undefined; assuming extern returning int
+C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\SelfDelete.c(84): warning C4047: 'initializing': 'CHAR16 *' differs in levels of indirection from 'int'
+AutoGen.c
+PatchBootmgr.c
+PatchNtoskrnl.c
+Waiting for thread ending...(1)
+pe.c
+util.c
+NMAKE : fatal error U1077: '"D:\Ewdk\Program Files\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\bin\Hostx86\x64\cl.exe" /FoD:\Efi-Manual\edk2\Build\EfiGuard\RELEASE_VS2022\X64\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe\OUTPUT\.\ /showIncludes /nologo /c /WX /GS /W4 /Gs32768 /D UNICODE /O1b2s /GL /Gy /FIAutoGen.h /EHs-c- /GR- /GF /Gw /volatileMetadata- -D ZYAN_NO_LIBC -D ZYCORE_STATIC_BUILD -D ZYDIS_STATIC_BUILD -D ZYDIS_DISABLE_ENCODER -D ZYDIS_DISABLE_FORMATTER -D ZYDIS_DISABLE_AVX512 -D ZYDIS_DISABLE_KNC -D EFIGUARD_SELF_DELETE /wd4201 /O2 /Ot /Zi -D DISABLE_NEW_DEPRECATED_INTERFACES /utf-8 /GS- /Qspectre- /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\X64  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe  /ID:\Efi-Manual\edk2\Build\EfiGuard\RELEASE_VS2022\X64\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe\DEBUG  /ID:\Efi-Manual\edk2\MdePkg  /ID:\Efi-Manual\edk2\MdePkg\Include  /ID:\Efi-Manual\edk2\MdePkg\Test\UnitTest\Include  /ID:\Efi-Manual\edk2\MdePkg\Test\Mock\Include  /ID:\Efi-Manual\edk2\MdePkg\Library\MipiSysTLib\mipisyst\library\include  /ID:\Efi-Manual\edk2\MdePkg\Include\X64  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\Include  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\Include\Protocol  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\Zydis\dependencies\zycore\include  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\Zydis\include  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\Zydis\src  /IC:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\Zydis\msvc  /ID:\Efi-Manual\edk2\MdeModulePkg  /ID:\Efi-Manual\edk2\MdeModulePkg\Include  /ID:\Efi-Manual\edk2\MdeModulePkg\Test\Mock\Include @D:\Efi-Manual\edk2\Build\EfiGuard\RELEASE_VS2022\X64\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe\OUTPUT\cc_resp_17.txt' : return code '0x2'
+Stop.
+
+
+build.py...
+ : error 7000: Failed to execute command
+	D:\Ewdk\Program Files\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.44.35207\bin\Hostx86\x86\nmake.exe /nologo tbuild [D:\Efi-Manual\edk2\Build\EfiGuard\RELEASE_VS2022\X64\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe]
+
+
+build.py...
+ : error F002: Failed to build module
+	C:\Users\DRS\AppData\Local\Temp\EfiGuardBuildEnv\EfiGuardPkg\EfiGuardDxe\EfiGuardDxe.inf [X64, VS2022, RELEASE]
+
+- Failed -
+Build end time: 14:45:10, Feb.07 2026
+Build total time: 00:00:02
+

@@ -5,6 +5,8 @@
  * Timing: After ExitBootServices, before kernel jump.
  */
 
+#include <Library/DevicePathLib.h>
+#include <Library/MemoryAllocationLib.h>
 #include "EfiGuardDxe.h"
 #include <Protocol/LoadedImage.h>
 #include <Protocol/SimpleFileSystem.h>
