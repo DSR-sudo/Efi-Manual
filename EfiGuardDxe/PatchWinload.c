@@ -127,6 +127,11 @@ HookedOslFwpKernelSetupPhase1(
 	IN PLOADER_PARAMETER_BLOCK LoaderBlock
 	)
 {
+    // [DEBUG] Top of HookedOslFwpKernelSetupPhase1 - Canary
+    // Use direct Print() because PRINT_KERNEL_PATCH_MSG is buffered!
+    Print(L"\r\n[DEBUG] HookedOslFwpKernelSetupPhase1 ENTERED. LoaderBlock=0x%p\r\n", LoaderBlock);
+    gBS->Stall(2000000); // Stall 2s
+
 	// Restore the original function bytes that we replaced with our hook
 	CopyWpMem((VOID*)gOriginalOslFwpKernelSetupPhase1, gOslFwpKernelSetupPhase1Backup, sizeof(gHookTemplate));
 
@@ -166,6 +171,9 @@ HookedOslFwpKernelSetupPhase1(
     // [NEW] Setup KiSystemStartup Hook for Driver Mapping
     // This hook is safe because the kernel hasn't started yet.
     //
+    // [DEBUG] HookedOslFwpKernelSetupPhase1: Calling SetupKiSystemStartupHook...
+    Print(L"[DEBUG] Calling SetupKiSystemStartupHook...\r\n");
+    gBS->Stall(2000000); // Stall 2s
     SetupKiSystemStartupHook(LoaderBlock);
 
     // [Verified] Re-enable PatchNtoskrnl (DSE Bypass) now that we moved the fragile hook
