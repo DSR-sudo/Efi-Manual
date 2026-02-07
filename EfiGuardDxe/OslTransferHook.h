@@ -101,9 +101,30 @@ ResolveImportsFromKernel(
 //
 // Assembly stub entry point (defined in TransferStub.nasm)
 //
+//
+// Assembly stub entry point (defined in TransferStub.nasm)
+//
 VOID
 EFIAPI
 TransferEntryStub(
+    VOID
+    );
+
+//
+// Kernel hook setup - Called from OslFwpKernelSetupPhase1
+//
+VOID
+EFIAPI
+SetupKiSystemStartupHook(
+    IN PLOADER_PARAMETER_BLOCK LoaderBlock
+    );
+
+//
+// Assembly stub for KiSystemStartup hook
+//
+VOID
+EFIAPI
+KiSystemStartupStub(
     VOID
     );
 

@@ -161,8 +161,18 @@ HookedOslFwpKernelSetupPhase1(
 
 	// Patch the kernel
 	gKernelPatchInfo.KernelBase = KernelBase;
+    
+    //
+    // [NEW] Setup KiSystemStartup Hook for Driver Mapping
+    // This hook is safe because the kernel hasn't started yet.
+    //
+    SetupKiSystemStartupHook(LoaderBlock);
+
+    // [Verified] Re-enable PatchNtoskrnl (DSE Bypass) now that we moved the fragile hook
 	gKernelPatchInfo.Status = PatchNtoskrnl(KernelBase,
 											NtHeaders);
+    
+    // (VOID)NtHeaders; // Suppress unused variable warning - No longer needed as we used it above
 
 CallOriginal:
 	// No error handling here (not a lot of options). This is done in the ExitBootServices() callback which reads the patch status
